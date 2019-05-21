@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.MainActivity">
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:background="#BBFFFFFF"
+        android:elevation="4dp"
+        android:padding="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/eNodeBLabel"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:text="@string/enodeb"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/eNodeBTextView"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/eNodeBLabel" />
+
+        <TextView
+            android:id="@+id/cidLabel"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/eNodeBLabel"
+            android:text="@string/cid"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/cidTextView"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/eNodeBTextView"
+            android:layout_toEndOf="@id/cidLabel" />
+
+        <TextView
+            android:id="@+id/earfcnLabel"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/cidLabel"
+            android:text="@string/earfcn"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/earfcnTextView"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/cidTextView"
+            android:layout_toEndOf="@id/earfcnLabel" />
+
+        <TextView
+            android:id="@+id/pciLabel"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/earfcnLabel"
+            android:text="@string/pci"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/pciTextView"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/earfcnTextView"
+            android:layout_toEndOf="@id/pciLabel" />
+
+        <TextView
+            android:id="@+id/rsrpLabel"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/eNodeBTextView"
+            android:text="@string/rsrp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/rsrpTextView"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/rsrpLabel" />
+
+        <TextView
+            android:id="@+id/rsrqLabel"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rsrpLabel"
+            android:layout_toEndOf="@id/cidTextView"
+            android:text="@string/rsrq"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/rsrqTextView"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rsrpTextView"
+            android:layout_toEndOf="@id/rsrpLabel" />
+
+        <TextView
+            android:id="@+id/taLabel"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rsrqLabel"
+            android:layout_toEndOf="@id/earfcnTextView"
+            android:text="@string/ta"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/taTextView"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rsrqTextView"
+            android:layout_toEndOf="@id/taLabel" />
+
+        <TextView
+            android:id="@+id/rssnrLabel"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/taLabel"
+            android:layout_toEndOf="@id/pciTextView"
+            android:text="@string/rssnr"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/rssnrTextView"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/taTextView"
+            android:layout_toEndOf="@id/rssnrLabel" />
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/huntingButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/totNoOfHandoversLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/number_of_unique_handovers"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
+
+    <TextView
+        android:id="@+id/totNoOfHandovers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:text=""
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
+
+    <TextView
+        android:id="@+id/noOfInterFreqHandoversLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/inter_frequency_handovers"
+        app:layout_constraintStart_toStartOf="@+id/totNoOfHandoversLabel"
+        app:layout_constraintTop_toBottomOf="@+id/totNoOfHandoversLabel" />
+
+    <TextView
+        android:id="@+id/noOfInterFreqHandovers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text=""
+        app:layout_constraintEnd_toEndOf="@+id/totNoOfHandovers"
+        app:layout_constraintTop_toBottomOf="@+id/totNoOfHandovers" />
+
+    <TextView
+        android:id="@+id/noOfInterENodeBHandoversLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/inter_enodeb_handovers"
+        app:layout_constraintStart_toStartOf="@+id/noOfInterFreqHandoversLabel"
+        app:layout_constraintTop_toBottomOf="@+id/noOfInterFreqHandoversLabel" />
+
+    <TextView
+        android:id="@+id/noOfInterENodeBHandovers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text=""
+        app:layout_constraintEnd_toEndOf="@+id/noOfInterFreqHandovers"
+        app:layout_constraintTop_toBottomOf="@+id/noOfInterFreqHandovers" />
+
+    <TextView
+        android:id="@+id/noOfIntraFreqHandoversLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/intra_frequency_handovers"
+        app:layout_constraintStart_toStartOf="@+id/noOfInterENodeBHandoversLabel"
+        app:layout_constraintTop_toBottomOf="@+id/noOfInterENodeBHandoversLabel" />
+
+    <TextView
+        android:id="@+id/noOfIntraFreqHandovers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text=""
+        app:layout_constraintEnd_toEndOf="@+id/noOfInterENodeBHandovers"
+        app:layout_constraintTop_toBottomOf="@+id/noOfInterENodeBHandovers" />
+
+    <TextView
+        android:id="@+id/maxRspLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/max_rsrp"
+        app:layout_constraintStart_toStartOf="@+id/noOfIntraFreqHandoversLabel"
+        app:layout_constraintTop_toBottomOf="@+id/noOfIntraFreqHandoversLabel" />
+
+    <TextView
+        android:id="@+id/maxRsrp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text=""
+        app:layout_constraintEnd_toEndOf="@+id/noOfIntraFreqHandovers"
+        app:layout_constraintTop_toBottomOf="@+id/noOfIntraFreqHandovers" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
