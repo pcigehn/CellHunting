@@ -19,6 +19,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 
+import java.text.SimpleDateFormat;
 import java.util.Locale;
 
 import se.pcprogramkonsult.cellhunting.R;
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
 
     private static final int LOCATION_PERMISSION_REQUEST = 0x1000;
+    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH);
 
     private HuntingViewModel mViewModel;
 
@@ -48,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView mNoOfInterENodeBHandoversTextView;
     private TextView mNoOfIntraFreqHandoversTextView;
     private TextView mMaxRsrpTextView;
+    private TextView mHuntingStartTextView;
+    private TextView mHuntingStateTextView;
 
     private Button mHuntingButton;
     @Nullable
@@ -92,16 +96,20 @@ public class MainActivity extends AppCompatActivity {
         mNoOfInterENodeBHandoversTextView = findViewById(R.id.noOfInterENodeBHandovers);
         mNoOfIntraFreqHandoversTextView = findViewById(R.id.noOfIntraFreqHandovers);
         mMaxRsrpTextView = findViewById(R.id.maxRsrp);
+        mHuntingStartTextView = findViewById(R.id.huntingStart);
+        mHuntingStateTextView = findViewById(R.id.huntingState);
 
         mHuntingButton = findViewById(R.id.huntingButton);
-        mHuntingButton.setOnClickListener(view -> {
+        mHuntingButton.setOnLongClickListener(view -> {
             if (mIsHuntingCells != null && mService != null) {
                 if (mIsHuntingCells) {
                     mService.stopHunting();
                 } else {
                     mService.startHunting();
                 }
+                return true;
             }
+            return false;
         });
 
         if (checkPermission()) {
@@ -210,6 +218,34 @@ public class MainActivity extends AppCompatActivity {
                 mMaxRsrpTextView.setText(String.format(Locale.ENGLISH, "%d dBm", maxRsrp));
             } else {
                 mMaxRsrpTextView.setText("-");
+            }
+        });
+
+        mViewModel.getHuntingStart().observe(this, huntingStart -> {
+            if (huntingStart != null) {
+                mHuntingStartTextView.setText(DATE_FORMAT.format(huntingStart));
+            } else {
+                mHuntingStartTextView.setText("-");
+            }
+        });
+
+        mViewModel.getHuntingState().observe(this, huntingState -> {
+            if (huntingState != null) {
+                switch (huntingState) {
+                    case LTE_CONNECTED:
+                        mHuntingStateTextView.setText(R.string.lte_connected);
+                        break;
+
+                    case WIFI_CONNECTED:
+                        mHuntingStateTextView.setText(R.string.wifi_connected);
+                        break;
+
+                    case NON_LTE_CONNECTED:
+                        mHuntingStateTextView.setText(R.string.non_lte_connected);
+                        break;
+                }
+            } else {
+                mHuntingStateTextView.setText("-");
             }
         });
 

@@ -8,8 +8,11 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import java.util.Date;
+
 import se.pcprogramkonsult.cellhunting.core.HuntingApp;
 import se.pcprogramkonsult.cellhunting.core.HuntingRepository;
+import se.pcprogramkonsult.cellhunting.core.HuntingState;
 
 public class HuntingViewModel extends AndroidViewModel {
 
@@ -49,6 +52,16 @@ public class HuntingViewModel extends AndroidViewModel {
     @NonNull
     public MutableLiveData<Integer> getMaxRsrp() {
         return mRepository.getMaxRsrp();
+    }
+
+    @NonNull
+    public MutableLiveData<Date> getHuntingStart() {
+        return mRepository.getHuntingStart();
+    }
+
+    @NonNull
+    public MutableLiveData<HuntingState> getHuntingState() {
+        return mRepository.getHuntingState();
     }
 
     @NonNull

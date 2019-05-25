@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -32,10 +33,14 @@ public class HuntingRepository {
     private final MutableLiveData<Integer> mNoOfInterENodeBHandovers = new MutableLiveData<>();
     private final MutableLiveData<Integer> mNoOfIntraFreqHandovers = new MutableLiveData<>();
     private final MutableLiveData<Integer> mMaxRsrp = new MutableLiveData<>();
+    private final MutableLiveData<Date> mHuntingStart = new MutableLiveData<>();
+    private final MutableLiveData<HuntingState> mHuntingState = new MutableLiveData<>();
 
     private HuntingRepository(final Application application) {
         mApplication = application;
         mCurrentServingCellMeasurement.setValue(null);
+        mHuntingStart.setValue(null);
+        mHuntingState.setValue(null);
         clearHuntingScores();
     }
 
@@ -80,12 +85,22 @@ public class HuntingRepository {
         return mMaxRsrp;
     }
 
+    @NonNull
+    public MutableLiveData<Date> getHuntingStart() {
+        return mHuntingStart;
+    }
+
+    @NonNull
+    public MutableLiveData<HuntingState> getHuntingState() {
+        return mHuntingState;
+    }
+
     void updateServingCellMeasurement(@Nullable CellInfoLte currentServingCell) {
         mCurrentServingCellMeasurement.postValue(currentServingCell);
         if (currentServingCell != null) {
             CellSignalStrengthLte currentSignalStrength = currentServingCell.getCellSignalStrength();
             int rsrp = currentSignalStrength.getRsrp();
-            if (mMaxRsrp.getValue() != null && rsrp > mMaxRsrp.getValue()) {
+            if (rsrp != Integer.MAX_VALUE && mMaxRsrp.getValue() != null && rsrp > mMaxRsrp.getValue()) {
                 mMaxRsrp.postValue(rsrp);
             }
         }
@@ -100,6 +115,14 @@ public class HuntingRepository {
                 (int)mUniqueHandovers.stream().filter(h -> h.getType() == HandoverType.INTER_ENODEB_HANDOVER).count());
         mNoOfIntraFreqHandovers.postValue(
                 (int)mUniqueHandovers.stream().filter(h -> h.getType() == HandoverType.INTRA_FREQ_HANDOVER).count());
+    }
+
+    void resetHuntingStart() {
+        mHuntingStart.setValue(new Date());
+    }
+
+    void setHuntingState(HuntingState huntingState) {
+        mHuntingState.postValue(huntingState);
     }
 
     void clearHuntingScores() {

@@ -7,6 +7,9 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkCapabilities;
 import android.os.Binder;
 import android.os.Handler;
 import android.os.HandlerThread;
@@ -51,9 +54,11 @@ public class HuntingService extends Service {
     private TelephonyManager mTelephonyManager;
     @Nullable
     private NotificationManager mNotificationManager;
+    @Nullable
+    private ConnectivityManager mConnectivityManager;
 
     @Nullable
-    private CellInfoLte mPreviousServingCell = null;
+    private CellInfoLte mPreviousServingCellLte = null;
 
     private Runnable mPinger;
     private Runnable mServingCellTracker;
@@ -64,6 +69,7 @@ public class HuntingService extends Service {
 
         mTelephonyManager = getSystemService(TelephonyManager.class);
         mNotificationManager = getSystemService(NotificationManager.class);
+        mConnectivityManager = getSystemService(ConnectivityManager.class);
         mRepository = ((HuntingApp) getApplication()).getRepository();
 
         if (mNotificationManager != null) {
@@ -124,14 +130,16 @@ public class HuntingService extends Service {
     public void onDestroy() {
         Log.i(TAG, "in onDestroy()");
         mServiceHandler.removeCallbacksAndMessages(null);
-        mPreviousServingCell = null;
+        mPreviousServingCellLte = null;
     }
 
     public void startHunting() {
         Log.i(TAG, "Start hunting");
-        mPreviousServingCell = null;
+        mPreviousServingCellLte = null;
+        mRepository.setHuntingState(null);
         mRepository.updateServingCellMeasurement(null);
         mRepository.setHuntingCells(true);
+        mRepository.resetHuntingStart();
         mRepository.clearHuntingScores();
         mServiceHandler.post(mServingCellTracker);
         mServiceHandler.post(mPinger);
@@ -145,34 +153,38 @@ public class HuntingService extends Service {
         mServiceHandler.removeCallbacks(mServingCellTracker);
         mRepository.setHuntingCells(false);
         mRepository.updateServingCellMeasurement(null);
-        mPreviousServingCell = null;
+        mRepository.setHuntingState(null);
+        mPreviousServingCellLte = null;
     }
 
     private void createServingCellTracker() {
         mServingCellTracker = () -> {
             try {
-                final CellInfoLte currentServingCell = getCurrentServingCell();
-                mRepository.updateServingCellMeasurement(currentServingCell);
-                if (currentServingCell != null) {
-                    final int currentCi = currentServingCell.getCellIdentity().getCi();
-                    if (currentCi > 0 && currentCi != Integer.MAX_VALUE) {
-                        final CellInfoLte previousServingCell = mPreviousServingCell;
-                        Handover handover = new Handover(currentServingCell, previousServingCell);
-                        if (handover.getType() != HandoverType.NO_HANDOVER) {
-                            mRepository.updateHandover(handover);
-                            switch (handover.getType()) {
-                                case INTER_FREQ_HANDOVER:
-                                    generateInterFreqHandoverNotification(handover);
-                                    break;
-                                case INTER_ENODEB_HANDOVER:
-                                    generateInterENodeBHandoverNotification(handover);
-                                    break;
-                                case INTRA_FREQ_HANDOVER:
-                                    generateIntraFreqNotification(handover);
-                                    break;
-                            }
+                boolean isWifiConnected = false;
+                if (mConnectivityManager != null) {
+                    Network network = mConnectivityManager.getActiveNetwork();
+                    if (network != null) {
+                        NetworkCapabilities networkCapabilities = mConnectivityManager.getNetworkCapabilities(network);
+                        isWifiConnected = networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI);
+                    }
+                }
+                if (isWifiConnected) {
+                    mRepository.setHuntingState(HuntingState.WIFI_CONNECTED);
+                    mRepository.updateServingCellMeasurement(null);
+                    mPreviousServingCellLte = null;
+                } else {
+                    final CellInfo currentServingCell = getCurrentServingCell();
+                    if (currentServingCell != null) {
+                        if (currentServingCell instanceof CellInfoLte) {
+                            final CellInfoLte currentServingCellLte = (CellInfoLte) currentServingCell;
+                            mRepository.setHuntingState(HuntingState.LTE_CONNECTED);
+                            mRepository.updateServingCellMeasurement(currentServingCellLte);
+                            checkHandover(currentServingCellLte);
+                        } else {
+                            mRepository.setHuntingState(HuntingState.NON_LTE_CONNECTED);
+                            mRepository.updateServingCellMeasurement(null);
+                            mPreviousServingCellLte = null;
                         }
-                        mPreviousServingCell = currentServingCell;
                     }
                 }
             } finally {
@@ -181,29 +193,51 @@ public class HuntingService extends Service {
         };
     }
 
+    private void checkHandover(CellInfoLte currentServingCellLte) {
+        final int currentCi = currentServingCellLte.getCellIdentity().getCi();
+        if (currentCi > 0 && currentCi != Integer.MAX_VALUE) {
+            Handover handover = new Handover(currentServingCellLte, mPreviousServingCellLte);
+            if (handover.getType() != HandoverType.NO_HANDOVER) {
+                mRepository.updateHandover(handover);
+                switch (handover.getType()) {
+                    case INTER_FREQ_HANDOVER:
+                        generateInterFreqHandoverNotification(handover);
+                        break;
+                    case INTER_ENODEB_HANDOVER:
+                        generateInterENodeBHandoverNotification(handover);
+                        break;
+                    case INTRA_FREQ_HANDOVER:
+                        generateIntraFreqNotification(handover);
+                        break;
+                }
+            }
+        }
+        mPreviousServingCellLte = currentServingCellLte;
+    }
+
     private void createPinger() {
         mPinger = () -> {
             final String host = "8.8.8.8";
             try {
                 final InetAddress address = InetAddress.getByName(host);
                 final boolean reachable = address.isReachable(2000);
+                if (!reachable) {
+                    Log.d(TAG, host + " is not reachable!");
+                }
             } catch (Exception e) {
                 Log.d(TAG, "Unable to ping " + host + ": " + e);
             } finally {
-                mServiceHandler.postDelayed(mPinger, 5000);
+                mServiceHandler.postDelayed(mPinger, 4000);
             }
         };
     }
 
-    private CellInfoLte getCurrentServingCell() {
+    private CellInfo getCurrentServingCell() {
         if (mTelephonyManager != null) {
             @SuppressLint("MissingPermission") final List<CellInfo> currentCellInfos = mTelephonyManager.getAllCellInfo();
             for (CellInfo cellInfo : currentCellInfos) {
-                if (cellInfo instanceof CellInfoLte) {
-                    CellInfoLte cellInfoLte = (CellInfoLte) cellInfo;
-                    if (cellInfoLte.isRegistered()) {
-                        return cellInfoLte;
-                    }
+                if (cellInfo.isRegistered()) {
+                    return cellInfo;
                 }
             }
         }

@@ -15,4 +15,8 @@
     <string name="inter_enodeb_handovers">Inter-eNodeB handovers</string>
     <string name="intra_frequency_handovers">Intra-frequency handovers</string>
     <string name="max_rsrp">Max RSRP</string>
+    <string name="hunting_started">Hunting started</string>
+    <string name="lte_connected">Serving LTE cell</string>
+    <string name="wifi_connected">Connected to Wifi! Please turn off Wifi…</string>
+    <string name="non_lte_connected">Serving cell is not LTE! Move to LTE coverage…</string>
 </resources>
