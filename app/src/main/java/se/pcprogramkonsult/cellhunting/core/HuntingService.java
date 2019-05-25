@@ -211,8 +211,8 @@ public class HuntingService extends Service {
                         break;
                 }
             }
+            mPreviousServingCellLte = currentServingCellLte;
         }
-        mPreviousServingCellLte = currentServingCellLte;
     }
 
     private void createPinger() {
@@ -235,9 +235,11 @@ public class HuntingService extends Service {
     private CellInfo getCurrentServingCell() {
         if (mTelephonyManager != null) {
             @SuppressLint("MissingPermission") final List<CellInfo> currentCellInfos = mTelephonyManager.getAllCellInfo();
-            for (CellInfo cellInfo : currentCellInfos) {
-                if (cellInfo.isRegistered()) {
-                    return cellInfo;
+            if (currentCellInfos != null) {
+                for (CellInfo cellInfo : currentCellInfos) {
+                    if (cellInfo.isRegistered()) {
+                        return cellInfo;
+                    }
                 }
             }
         }
