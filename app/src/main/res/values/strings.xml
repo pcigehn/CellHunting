@@ -19,4 +19,6 @@
     <string name="lte_connected">Serving LTE cell</string>
     <string name="wifi_connected">Connected to Wifi! Please turn off Wifi…</string>
     <string name="non_lte_connected">Serving cell is not LTE! Move to LTE coverage…</string>
+    <string name="start_stop_hint">Tip: Long press to start and stop</string>
+    <string name="notification_settings_hint">Tip: Use links above to notification settings per handover type to set different sounds to make them distinguishable</string>
 </resources>

@@ -8,9 +8,15 @@ import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.provider.Settings;
 import android.telephony.CellIdentityLte;
 import android.telephony.CellSignalStrengthLte;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -112,6 +118,10 @@ public class MainActivity extends AppCompatActivity {
             return false;
         });
 
+        generateLinkToNotificationSettings(R.id.noOfInterFreqHandoversLabel, HuntingService.CHANNEL_ID_INTER_FREQ_HANDOVER);
+        generateLinkToNotificationSettings(R.id.noOfInterENodeBHandoversLabel, HuntingService.CHANNEL_ID_INTER_ENODEB_HANDOVER);
+        generateLinkToNotificationSettings(R.id.noOfIntraFreqHandoversLabel, HuntingService.CHANNEL_ID_INTRA_FREQ_HANDOVER);
+
         if (checkPermission()) {
             onCreateWithPermissionGranted();
         } else {
@@ -144,6 +154,24 @@ public class MainActivity extends AppCompatActivity {
 
     private void onStartWithPermissionGranted() {
         bindService(new Intent(this, HuntingService.class), mServiceConnection, Context.BIND_AUTO_CREATE);
+    }
+
+    private void generateLinkToNotificationSettings(int viewId, String channelId) {
+        final TextView view = findViewById(viewId);
+        final CharSequence text = view.getText();
+        final SpannableString spannableString = new SpannableString(text);
+        ClickableSpan clickableSpan = new ClickableSpan() {
+            @Override
+            public void onClick(@NonNull View textView) {
+                Intent settingsIntent = new Intent(Settings.ACTION_CHANNEL_NOTIFICATION_SETTINGS)
+                        .putExtra(Settings.EXTRA_APP_PACKAGE, getPackageName())
+                        .putExtra(Settings.EXTRA_CHANNEL_ID, channelId);
+                startActivity(settingsIntent);
+            }
+        };
+        spannableString.setSpan(clickableSpan, 0, spannableString.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        view.setMovementMethod(LinkMovementMethod.getInstance());
+        view.setText(spannableString, TextView.BufferType.SPANNABLE);
     }
 
     private void subscribeToViewModel() {

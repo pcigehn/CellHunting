@@ -42,9 +42,10 @@ public class HuntingService extends Service {
     private static final int NOTIFICATION_ID_INTER_ENODEB_HANDOVER = 0xFF0040;
 
     private static final String CHANNEL_ID_HUNTING = "channel_hunting";
-    private static final String CHANNEL_ID_INTER_FREQ_HANDOVER = "channel_inter_freq_handover";
-    private static final String CHANNEL_ID_INTRA_FREQ_HANDOVER = "channel_intra_freq_handover";
-    private static final String CHANNEL_ID_INTER_ENODEB_HANDOVER = "channel_inter_enodeb_handover";
+
+    public static final String CHANNEL_ID_INTER_FREQ_HANDOVER = "channel_inter_freq_handover";
+    public static final String CHANNEL_ID_INTRA_FREQ_HANDOVER = "channel_intra_freq_handover";
+    public static final String CHANNEL_ID_INTER_ENODEB_HANDOVER = "channel_inter_enodeb_handover";
 
     private final IBinder mBinder = new LocalBinder();
 
