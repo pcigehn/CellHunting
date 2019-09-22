@@ -10,7 +10,7 @@
     <string name="rsrq">RSRQ</string>
     <string name="ta">TA</string>
     <string name="rssnr">RSSNR</string>
-    <string name="number_of_unique_handovers">Number of unique handovers</string>
+    <string name="number_of_unique_handovers">Unique handovers</string>
     <string name="inter_frequency_handovers">Inter-frequency handovers</string>
     <string name="inter_enodeb_handovers">Inter-eNodeB handovers</string>
     <string name="intra_frequency_handovers">Intra-frequency handovers</string>
@@ -21,4 +21,12 @@
     <string name="non_lte_connected">Serving cell is not LTE! Move to LTE coverage…</string>
     <string name="start_stop_hint">Tip: Long press to start and stop</string>
     <string name="notification_settings_hint">Tip: Use links above to notification settings per handover type to set different sounds to make them distinguishable</string>
+    <string name="eNodeBTooltip">eNodeB Identity (0..1048575)</string>
+    <string name="cidTooltip">Cell Identity (0..255)</string>
+    <string name="earfcnTooltip">Evolved-UTRA Absolute Radio Frequency Number (0..65535)</string>
+    <string name="pciTooltip">Physical Cell Identity (0..503)</string>
+    <string name="rsrpTooltip">Reference Signal Received Power (-44..-140 dBm)</string>
+    <string name="rsrqTooltip">Reference Signal Received Quality (-3..-19.5 dB)</string>
+    <string name="taTooltip">Timing Advance (0..1282)</string>
+    <string name="rssnrTooltip">Reference Signal Signal to Noise Ratio</string>
 </resources>

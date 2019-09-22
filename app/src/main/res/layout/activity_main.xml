@@ -10,7 +10,7 @@
         android:id="@+id/huntingState"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -30,123 +30,155 @@
 
         <TextView
             android:id="@+id/eNodeBLabel"
-            android:layout_width="60dp"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
+            android:maxLines="1"
             android:text="@string/enodeb"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:tooltipText="@string/eNodeBTooltip" />
 
         <TextView
             android:id="@+id/eNodeBTextView"
             android:layout_width="70dp"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/eNodeBLabel" />
+            android:layout_toEndOf="@id/eNodeBLabel"
+            android:maxLines="1"
+            android:tooltipText="@string/eNodeBTooltip" />
 
         <TextView
             android:id="@+id/cidLabel"
-            android:layout_width="60dp"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/eNodeBLabel"
+            android:maxLines="1"
             android:text="@string/cid"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:tooltipText="@string/cidTooltip" />
 
         <TextView
             android:id="@+id/cidTextView"
             android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/eNodeBTextView"
-            android:layout_toEndOf="@id/cidLabel" />
+            android:layout_toEndOf="@id/cidLabel"
+            android:maxLines="1"
+            android:tooltipText="@string/cidTooltip" />
 
         <TextView
             android:id="@+id/earfcnLabel"
-            android:layout_width="60dp"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/cidLabel"
+            android:maxLines="1"
             android:text="@string/earfcn"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:tooltipText="@string/earfcnTooltip" />
 
         <TextView
             android:id="@+id/earfcnTextView"
             android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/cidTextView"
-            android:layout_toEndOf="@id/earfcnLabel" />
+            android:layout_toEndOf="@id/earfcnLabel"
+            android:maxLines="1"
+            android:tooltipText="@string/earfcnTooltip" />
 
         <TextView
             android:id="@+id/pciLabel"
-            android:layout_width="60dp"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/earfcnLabel"
+            android:maxLines="1"
             android:text="@string/pci"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:tooltipText="@string/pciTooltip" />
 
         <TextView
             android:id="@+id/pciTextView"
             android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/earfcnTextView"
-            android:layout_toEndOf="@id/pciLabel" />
+            android:layout_toEndOf="@id/pciLabel"
+            android:maxLines="1"
+            android:tooltipText="@string/pciTooltip" />
 
         <TextView
             android:id="@+id/rsrpLabel"
-            android:layout_width="60dp"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:layout_toEndOf="@id/eNodeBTextView"
+            android:maxLines="1"
             android:text="@string/rsrp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:tooltipText="@string/rsrpTooltip" />
 
         <TextView
             android:id="@+id/rsrpTextView"
             android:layout_width="70dp"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/rsrpLabel" />
+            android:layout_toEndOf="@id/rsrpLabel"
+            android:maxLines="1"
+            android:tooltipText="@string/rsrpTooltip" />
 
         <TextView
             android:id="@+id/rsrqLabel"
-            android:layout_width="60dp"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/rsrpLabel"
             android:layout_toEndOf="@id/cidTextView"
+            android:maxLines="1"
             android:text="@string/rsrq"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:tooltipText="@string/rsrqTooltip" />
 
         <TextView
             android:id="@+id/rsrqTextView"
             android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/rsrpTextView"
-            android:layout_toEndOf="@id/rsrpLabel" />
+            android:layout_toEndOf="@id/rsrpLabel"
+            android:maxLines="1"
+            android:tooltipText="@string/rsrqTooltip" />
 
         <TextView
             android:id="@+id/taLabel"
-            android:layout_width="60dp"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/rsrqLabel"
             android:layout_toEndOf="@id/earfcnTextView"
+            android:maxLines="1"
             android:text="@string/ta"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:tooltipText="@string/taTooltip" />
 
         <TextView
             android:id="@+id/taTextView"
             android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/rsrqTextView"
-            android:layout_toEndOf="@id/taLabel" />
+            android:layout_toEndOf="@id/taLabel"
+            android:maxLines="1"
+            android:tooltipText="@string/taTooltip" />
 
         <TextView
             android:id="@+id/rssnrLabel"
-            android:layout_width="60dp"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/taLabel"
             android:layout_toEndOf="@id/pciTextView"
+            android:maxLines="1"
             android:text="@string/rssnr"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:tooltipText="@string/rssnrTooltip" />
 
         <TextView
             android:id="@+id/rssnrTextView"
             android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/taTextView"
-            android:layout_toEndOf="@id/rssnrLabel" />
+            android:layout_toEndOf="@id/rssnrLabel"
+            android:maxLines="1"
+            android:tooltipText="@string/rssnrTooltip" />
 
     </RelativeLayout>
 
@@ -155,7 +187,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:text="@string/number_of_unique_handovers"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -166,7 +198,7 @@
         android:id="@+id/totNoOfHandovers"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
         android:text=""
         android:textSize="20sp"
@@ -178,7 +210,7 @@
         android:id="@+id/noOfInterFreqHandoversLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:text="@string/inter_frequency_handovers"
         app:layout_constraintStart_toStartOf="@+id/totNoOfHandoversLabel"
         app:layout_constraintTop_toBottomOf="@+id/totNoOfHandoversLabel" />
@@ -187,7 +219,7 @@
         android:id="@+id/noOfInterFreqHandovers"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:text=""
         app:layout_constraintEnd_toEndOf="@+id/totNoOfHandovers"
         app:layout_constraintTop_toBottomOf="@+id/totNoOfHandovers" />
@@ -196,7 +228,7 @@
         android:id="@+id/noOfInterENodeBHandoversLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:text="@string/inter_enodeb_handovers"
         app:layout_constraintStart_toStartOf="@+id/noOfInterFreqHandoversLabel"
         app:layout_constraintTop_toBottomOf="@+id/noOfInterFreqHandoversLabel" />
@@ -205,7 +237,7 @@
         android:id="@+id/noOfInterENodeBHandovers"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:text=""
         app:layout_constraintEnd_toEndOf="@+id/noOfInterFreqHandovers"
         app:layout_constraintTop_toBottomOf="@+id/noOfInterFreqHandovers" />
@@ -214,7 +246,7 @@
         android:id="@+id/noOfIntraFreqHandoversLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:text="@string/intra_frequency_handovers"
         app:layout_constraintStart_toStartOf="@+id/noOfInterENodeBHandoversLabel"
         app:layout_constraintTop_toBottomOf="@+id/noOfInterENodeBHandoversLabel" />
@@ -223,7 +255,7 @@
         android:id="@+id/noOfIntraFreqHandovers"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:text=""
         app:layout_constraintEnd_toEndOf="@+id/noOfInterENodeBHandovers"
         app:layout_constraintTop_toBottomOf="@+id/noOfInterENodeBHandovers" />
@@ -232,7 +264,7 @@
         android:id="@+id/maxRspLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:text="@string/max_rsrp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/noOfIntraFreqHandoversLabel"
@@ -242,7 +274,7 @@
         android:id="@+id/maxRsrp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:text=""
         app:layout_constraintEnd_toEndOf="@+id/noOfIntraFreqHandovers"
         app:layout_constraintTop_toBottomOf="@+id/noOfIntraFreqHandovers" />
@@ -251,7 +283,7 @@
         android:id="@+id/huntingStartLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:text="@string/hunting_started"
         app:layout_constraintStart_toStartOf="@+id/maxRspLabel"
         app:layout_constraintTop_toBottomOf="@+id/maxRspLabel" />
@@ -260,7 +292,7 @@
         android:id="@+id/huntingStart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:text=""
         app:layout_constraintEnd_toEndOf="@+id/maxRsrp"
         app:layout_constraintTop_toBottomOf="@+id/maxRsrp" />
@@ -293,7 +325,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="32dp"
         android:gravity="center_horizontal"
         android:paddingHorizontal="32dp"
