@@ -25,8 +25,8 @@
     <string name="cidTooltip">Cell Identity (0..255)</string>
     <string name="earfcnTooltip">Evolved-UTRA Absolute Radio Frequency Number (0..65535)</string>
     <string name="pciTooltip">Physical Cell Identity (0..503)</string>
-    <string name="rsrpTooltip">Reference Signal Received Power (-44..-140 dBm)</string>
-    <string name="rsrqTooltip">Reference Signal Received Quality (-3..-19.5 dB)</string>
+    <string name="rsrpTooltip">Reference Signal Received Power (-140..-44 dBm)</string>
+    <string name="rsrqTooltip">Reference Signal Received Quality (-19.5..-3 dB)</string>
     <string name="taTooltip">Timing Advance (0..1282)</string>
     <string name="rssnrTooltip">Reference Signal Signal to Noise Ratio</string>
 </resources>
