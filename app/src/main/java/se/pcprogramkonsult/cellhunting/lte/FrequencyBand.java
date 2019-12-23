@@ -1,6 +1,7 @@
 package se.pcprogramkonsult.cellhunting.lte;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -88,6 +89,7 @@ class FrequencyBand implements Comparable<FrequencyBand> {
         mFreqLow = freqLow;
     }
 
+    @Nullable
     static FrequencyBand getBand(final int earfcn) {
         for (FrequencyBand frequencyBand : frequencyBands) {
             if (frequencyBand.isInRange(earfcn)) {

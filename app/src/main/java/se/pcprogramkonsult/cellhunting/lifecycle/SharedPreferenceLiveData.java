@@ -2,6 +2,7 @@ package se.pcprogramkonsult.cellhunting.lifecycle;
 
 import android.content.SharedPreferences;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 
 abstract class SharedPreferenceLiveData<T> extends LiveData<T> {
@@ -12,7 +13,7 @@ abstract class SharedPreferenceLiveData<T> extends LiveData<T> {
     private final SharedPreferences.OnSharedPreferenceChangeListener mPreferenceChangeListener =
             new SharedPreferences.OnSharedPreferenceChangeListener() {
                 @Override
-                public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+                public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, @NonNull String key) {
                     if (key.equals(mKey)) {
                         setValue(getValueFromPreferences());
                     }

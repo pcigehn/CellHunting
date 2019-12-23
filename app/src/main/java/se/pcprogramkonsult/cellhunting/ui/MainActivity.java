@@ -23,7 +23,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 
 import java.text.SimpleDateFormat;
 import java.util.Locale;
@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mViewModel = ViewModelProviders.of(this).get(HuntingViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(HuntingViewModel.class);
 
         mENodeBTextView = findViewById(R.id.eNodeBTextView);
         mCidTextView = findViewById(R.id.cidTextView);

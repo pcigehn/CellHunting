@@ -194,7 +194,7 @@ public class HuntingService extends Service {
         };
     }
 
-    private void checkHandover(CellInfoLte currentServingCellLte) {
+    private void checkHandover(@NonNull CellInfoLte currentServingCellLte) {
         final int currentCi = currentServingCellLte.getCellIdentity().getCi();
         if (currentCi > 0 && currentCi != Integer.MAX_VALUE) {
             Handover handover = new Handover(currentServingCellLte, mPreviousServingCellLte);
@@ -233,6 +233,7 @@ public class HuntingService extends Service {
         };
     }
 
+    @Nullable
     private CellInfo getCurrentServingCell() {
         if (mTelephonyManager != null) {
             @SuppressLint("MissingPermission") final List<CellInfo> currentCellInfos = mTelephonyManager.getAllCellInfo();
