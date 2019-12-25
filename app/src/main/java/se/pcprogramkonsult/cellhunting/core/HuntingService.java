@@ -166,7 +166,9 @@ public class HuntingService extends Service {
                     Network network = mConnectivityManager.getActiveNetwork();
                     if (network != null) {
                         NetworkCapabilities networkCapabilities = mConnectivityManager.getNetworkCapabilities(network);
-                        isWifiConnected = networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI);
+                        if (networkCapabilities != null) {
+                            isWifiConnected = networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI);
+                        }
                     }
                 }
                 if (isWifiConnected) {
