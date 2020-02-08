@@ -1,7 +1,6 @@
 package se.pcprogramkonsult.cellhunting.core;
 
 import android.app.Application;
-import android.preference.PreferenceManager;
 import android.telephony.CellInfoLte;
 import android.telephony.CellSignalStrengthLte;
 
@@ -9,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.preference.PreferenceManager;
 
 import java.util.Date;
 import java.util.HashSet;
